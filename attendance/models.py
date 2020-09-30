@@ -19,7 +19,7 @@ class Profile(models.Model):
 
 class UserPhoto(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='checkmate/user', blank=True)
+    photo = models.ImageField(upload_to='checkmate/user', blank=True)  # photo.url 로 접근해야 이미지 보임
 
 
 class Classroom(models.Model):
@@ -37,6 +37,9 @@ class Role(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     is_checker = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.user}' 
 
 class Attendance(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

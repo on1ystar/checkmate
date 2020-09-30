@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Attendance, Role, Classroom
+from .models import Profile, Attendance, Role, Classroom, UserPhoto
 from django.conf import settings
 from django.contrib.auth.models import User
 
@@ -21,5 +21,8 @@ class AttendanceAdmin(admin.ModelAdmin):
 
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
-    user = settings.AUTH_USER_MODEL
     list_display = ['user', 'classroom', 'is_checker']
+
+@admin.register(UserPhoto)
+class UserPhotoAdmin(admin.ModelAdmin):
+    pass

@@ -1,0 +1,26 @@
+<table>
+    <tbody>
+        {% for classroom, role in classroom_role %}
+            <tr>
+                <td>
+                    {{ classroom.name }}
+                </td>
+                <td>
+                    {{ classroom.uuid }}
+                </td>
+                <td>
+                    {{ classroom.personnel }}
+                </td>
+                {% if role.is_checker %}
+                <td>
+                    checker
+                </td>
+                {% else %}
+                <td>
+                    mate
+                </td>
+                {%endif%}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

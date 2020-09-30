@@ -1,0 +1,18 @@
+{{user.username}}
+
+{% if user.email %}
+    <div>
+        {{user.email}}
+    </div>
+{% endif %}
+
+{{profile.school}}
+
+{{profile.student_id}}
+
+
+    <div>
+        {% for p in photo %}
+            <img src={{p.photo.url}} width="90">
+        {% endfor %}
+    </div>

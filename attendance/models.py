@@ -9,16 +9,16 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE)
     school = models.CharField(max_length=20)
     student_id = models.CharField(max_length=20, blank=True)
-    classroom = models.ForeignKey('Classroom', on_delete=models.CASCADE)
+    classroom_set = models.ManyToManyField('Classroom', blank=True, through='Role')
 
     def __str__(self):
         return f'{self.user}'
 
 class UserPhoto(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='checkmate/user', blank=True)  # photo.url 로 접근해야 이미지 보임
 
 
@@ -29,20 +29,22 @@ class Classroom(models.Model):
     timer = models.DurationField(blank=True)
     personnel = models.PositiveIntegerField(default=10)
     created_at = models.DateTimeField(auto_now_add=True)
+    # profile_set -> related name
+    # add, remove 함수로 유저 추가, 삭제
 
     def __str__(self):
         return f'{self.name}'
     
 class Role(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
-    is_checker = models.BooleanField(default=False)
+    is_checker = models.BooleanField(default=False, verbose_name='체커')
 
     def __str__(self):
-        return f'{self.user}' 
+        return f'{self.is_checker}' 
 
 class Attendance(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     is_attendance = models.BooleanField(default=False)
     time_out = models.DurationField(default=0, blank=True)

@@ -16,6 +16,8 @@ def user_detail(request, pk):
 
 def classroom_list(request, pk):
     classroom_role = []
+    q = request.GET.get('q', '')
+
     role = get_list_or_404(Role, user_id = pk)
     for r in role:
         classroom_role.append([Classroom.objects.get(uuid=r.classroom_id), r])

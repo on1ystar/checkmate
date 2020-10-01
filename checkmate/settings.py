@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # lacals apps
     'attendance',
     'face',
+    'accounts',
 ]
 
 MIDDLEWARE = [

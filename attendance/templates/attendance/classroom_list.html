@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>My classroom</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+{% extends "attendance/layout.html"  %}
 
-</head>
-<body>
+{% block title %}
+    My classroom
+{% endblock title %}
+
+{% block content %}
     <!-- <form action="" method="get">
         <input type="text", name="q"/>
         <input type="submit" value="검색" />
@@ -16,7 +14,7 @@
             {% for role in role_list %}
                 <tr>
                     <td>
-                        {{ role.classroom.name }}
+                        <a href= "{% url 'attendance:classroom_detail' role.classroom.uuid %} " >{{ role.classroom.name }}</a>
                     </td>
                     <td>
                         {{ role.classroom.uuid }}
@@ -37,5 +35,4 @@
             {% endfor %}
         </tbody>
     </table>
-</body>
-</html>
+{% endblock content %}

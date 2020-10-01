@@ -1,11 +1,25 @@
-{{classroom.uuid}}
-<br>
-{{classroom.name}}
-<br>
-{{classroom.desc}}
-<br>
-{{classroom.personnel}}
-<br>
-{{classroom.timer}}
-<br>
-{{classroom.created_at}}
+{% extends "attendance/layout.html"  %}
+
+{% block title %}
+    {{classroom.name}}
+{% endblock title %}
+
+{% block content %}
+    <div>
+        uuid:   {{classroom.uuid}}
+        <br>
+        <p> classroom name:    {{classroom.name}} </p> 
+        <br>
+        소개:   {{classroom.desc}}
+        <br>
+        제한인원:   {{classroom.personnel}}
+        <br>
+        자리비움 제한 시간:     {{classroom.timer}}
+        <br>
+        생성일:      {{classroom.created_at}}
+    </div>
+<!-- 
+    <a href="{% url 'attendance:classroom_list' classroom %}" class="btn btn-primary">
+        목록
+    </a> -->
+{% endblock content %}

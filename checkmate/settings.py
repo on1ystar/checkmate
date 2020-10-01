@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # third apps
     'django_extensions',
+    'bootstrap4',
     # lacals apps
     'attendance',
     'face',

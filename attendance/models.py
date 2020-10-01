@@ -34,6 +34,9 @@ class Classroom(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    class Meta:
+        ordering = ['name', 'uuid']    
     
 class Role(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -43,9 +46,15 @@ class Role(models.Model):
     def __str__(self):
         return f'{self.is_checker}' 
 
+    class Meta:
+        ordering = ['classroom', 'is_checker', '-user' ]
+
 class Attendance(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
     is_attendance = models.BooleanField(default=False)
     time_out = models.DurationField(default=0, blank=True)
     checked_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['classroom', 'user']

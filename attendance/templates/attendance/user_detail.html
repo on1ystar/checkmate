@@ -1,8 +1,8 @@
-{{user.username}}
+{{profile.user.username}}
 
-{% if user.email %}
+{% if profile.user.email %}
     <div>
-        {{user.email}}
+        {{profile.user.email}}
     </div>
 {% endif %}
 
@@ -12,7 +12,7 @@
 
 
     <div>
-        {% for p in photo %}
+        {% for p in profile.userphoto_set.all %}
             <img src={{p.photo.url}} width="90">
         {% endfor %}
     </div>

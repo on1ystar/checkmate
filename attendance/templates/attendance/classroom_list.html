@@ -1,26 +1,41 @@
-<table>
-    <tbody>
-        {% for classroom, role in classroom_role %}
-            <tr>
-                <td>
-                    {{ classroom.name }}
-                </td>
-                <td>
-                    {{ classroom.uuid }}
-                </td>
-                <td>
-                    {{ classroom.personnel }}
-                </td>
-                {% if role.is_checker %}
-                <td>
-                    checker
-                </td>
-                {% else %}
-                <td>
-                    mate
-                </td>
-                {%endif%}
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>My classroom</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body>
+    <!-- <form action="" method="get">
+        <input type="text", name="q"/>
+        <input type="submit" value="검색" />
+    </form> -->
+    <table class="table table-bordered table-hover">
+        <tbody>
+            {% for role in role_list %}
+                <tr>
+                    <td>
+                        {{ role.classroom.name }}
+                    </td>
+                    <td>
+                        {{ role.classroom.uuid }}
+                    </td>
+                    <td>
+                        {{ role.classroom.personnel }}
+                    </td>
+                    {% if role.is_checker %}
+                    <td>
+                        checker
+                    </td>
+                    {% else %}
+                    <td>
+                        mate
+                    </td>
+                    {%endif%}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

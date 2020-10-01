@@ -5,25 +5,19 @@ from .models import Profile, UserPhoto, Classroom, Role
 
 # Create your views here.
 def user_detail(request, pk):
-    user = get_object_or_404(User, pk=pk)
     profile = get_object_or_404(Profile, user_id=pk)
-    photo = get_list_or_404(UserPhoto, user_id=pk)
     return render(request, 'attendance/user_detail.html',{
-        'user': user,
         'profile': profile,
-        'photo': photo,
     })
 
 def classroom_list(request, pk):
-    classroom_role = []
     q = request.GET.get('q', '')
 
-    role = get_list_or_404(Role, user_id = pk)
-    for r in role:
-        classroom_role.append([Classroom.objects.get(uuid=r.classroom_id), r])
+    role_list = Role.objects.select_related('user').select_related('classroom').filter(user=pk)
     return render(request, 'attendance/classroom_list.html',{
-        'classroom_role': classroom_role,
+        'role_list': role_list
     })
+
 
 def classroom_detail(request, uuid):
     classroom = get_object_or_404(Classroom, uuid= uuid)

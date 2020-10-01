@@ -4,12 +4,6 @@ from django.contrib.auth.models import User
 from .models import Profile, UserPhoto, Classroom, Role
 
 # Create your views here.
-def user_detail(request, pk):
-    profile = get_object_or_404(Profile, user_id=pk)
-    return render(request, 'attendance/user_detail.html',{
-        'profile': profile,
-    })
-
 def classroom_list(request, pk):
     q = request.GET.get('q', '')
 
@@ -29,12 +23,6 @@ def classroom_detail(request, uuid):
 def mate_list(request, pk):  # pk = user의 pk 
     pass
 
-
-def login(request):
-    return render(request, 'attendance/login.html')
-
-def sign_in(request):
-    return render(request, 'attendance/sign_in.html')
 
 '''
 model._meta.model_name

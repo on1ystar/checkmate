@@ -1,5 +1,6 @@
 {% extends "accounts/layout.html" %}
 {% load bootstrap4 %}
+{% load static %}
 {% block style %}
 <style>
 
@@ -69,7 +70,6 @@
 {% block content %}
 <form class="form-signin" action=""method="post" >
     {% csrf_token %}
-    {% load static %}
     <center><img class="mb-4" src= "{% static "img/logo.png" %}"  alt="" width="150" height="150"></center>
     <center><h2 class="h3 mb-3 font-weight-normal">Please login</h2></center>
     {% bootstrap_form form %}

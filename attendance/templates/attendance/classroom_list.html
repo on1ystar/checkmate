@@ -5,16 +5,23 @@
 {% endblock title %}
 
 {% block content %}
-    <!-- <form action="" method="get">
+    <!-- <form action="" method="get"> multipart/form-data request.FILES
         <input type="text", name="q"/>
         <input type="submit" value="검색" />
     </form> -->
+
+    <a href="{% url 'attendance:classroom_new' %}" class="btn btn-primary mt-3 mb-3 align-right">
+        new classroom
+    </a>
+
     <table class="table table-bordered table-hover">
         <tbody>
             {% for role in role_list %}
                 <tr>
                     <td>
-                        <a href= "{% url 'attendance:classroom_detail' role.classroom.uuid %} " >{{ role.classroom.name }}</a>
+                        <a href= "{% url 'attendance:classroom_detail' uuid=role.classroom.uuid is_checker=role.is_checker %} " >
+                            {{ role.classroom.name }}
+                        </a>
                     </td>
                     <td>
                         {{ role.classroom.uuid }}

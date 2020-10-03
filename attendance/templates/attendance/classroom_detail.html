@@ -6,20 +6,21 @@
 
 {% block content %}
     <div>
-        uuid:   {{classroom.uuid}}
-        <br>
-        <p> classroom name:    {{classroom.name}} </p> 
-        <br>
-        소개:   {{classroom.desc}}
-        <br>
-        제한인원:   {{classroom.personnel}}
-        <br>
-        자리비움 제한 시간:     {{classroom.timer}}
-        <br>
-        생성일:      {{classroom.created_at}}
+        <p>uuid:  {{classroom.uuid}}</p>
+        <p> classroom name:{{classroom.name}} </p> 
+        <p>소개: {{classroom.desc|linebreaks}}</p>
+        <p>제한인원: {{classroom.personnel}}</p> 
+        <p>자리비움 제한 시간: {{classroom.timer}}</p>
+        <p>생성일: {{classroom.created_at}}</p> 
     </div>
 
     <a href="{% url 'attendance:classroom_list' user.id %}" class="btn btn-primary">
         목록
     </a>
+
+    {% if is_checker == 'True' %}
+        <a href="{% url 'attendance:classroom_edit' classroom.uuid %}" class="btn btn-info">
+            수정
+        </a>
+    {% endif %}
 {% endblock content %}

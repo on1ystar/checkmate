@@ -1,9 +1,27 @@
+{% extends 'attendance/layout.html' %}
+{% load bootstrap4 %}
 
-
-<form action="" method="post">
-    {% csrf_token %}
-    <table>
-        {{ form }}
-    </table>
-    <input type="submit" value="SAVE">
-</form>
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% comment %} <table>
+            {{ form }}
+        </table> {% endcomment %}
+        {% buttons %}
+            <button class="btn btn-success">
+                저장
+            </button>
+        {% endbuttons %}
+    </form>
+    <hr/>
+    
+    {% if classroom %}
+        <a href="{{classroom.get_absolute_url}}" class="btn btn-danger" >
+            취소
+        </a>
+    {% endif %}
+    <a href="{% url 'attendance:classroom_list' user.id %}" class="btn btn-primary">
+        목록
+    </a>
+{% endblock %}

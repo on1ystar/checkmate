@@ -26,7 +26,7 @@ class Classroom(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=30)
     desc = models.TextField(blank=True)
-    timer = models.DurationField(blank=True)
+    timer = models.DurationField(default=300, blank=False, null=False)
     personnel = models.PositiveIntegerField(default=10)
     created_at = models.DateTimeField(auto_now_add=True)
     # profile_set -> related name

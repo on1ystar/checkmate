@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import Profile, UserPhoto, Classroom, Role
 from .forms import ClassroomForm, RoleForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 @login_required
@@ -18,12 +19,14 @@ def classroom_new(request):
             role.classroom = classroom
             role.is_checker = True
             role.save()
+            messages.success(request, '새로운 classroom을 생성했습니다.')
             return redirect(classroom)
     else:
         form = ClassroomForm()
         
     return render(request, 'attendance/classroom_form.html', {
         'form': form,
+        'classroom': None,
     })
 
 @login_required
@@ -34,12 +37,26 @@ def classroom_edit(request, uuid):
         form = ClassroomForm(request.POST, request.FILES, instance=classroom)
         if form.is_valid():
             classroom = form.save()
+            messages.success(request, 'classroom을 수정했습니다.')
             return redirect(classroom)
     else:
         form = ClassroomForm(instance=classroom)
         
     return render(request, 'attendance/classroom_form.html', {
         'form': form,
+        'classroom': classroom,
+    })
+
+
+@login_required
+def classroom_delete(request, uuid):
+    classroom = get_object_or_404(Classroom, uuid = uuid)
+    if request.method == 'POST':
+        classroom.delete()
+        messages.success(request, 'classroom을 삭제했습니다.')
+        return redirect('attendance:classroom_list', request.user.pk)
+    return render(request, 'attendance/classroom_confirm_delete.html',{
+        'classroom': classroom,
     })
 
 @login_required
@@ -75,8 +92,8 @@ dispatch -> render
 로그인
 회원가입
 마이페이지
-클래스 생성
-클래스 목록
-클래스 디테일
+
+클래스 참여
+클래스 참여 수락/거절
 출석관리
 '''

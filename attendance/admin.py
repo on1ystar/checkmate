@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 # Register your models here.
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user_id', 'school', 'student_id']
+    list_display = ['user_id', 'nickname', 'school', 'student_id']
     list_display_links = ['user_id']
 
 @admin.register(Classroom)

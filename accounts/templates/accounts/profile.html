@@ -1,4 +1,7 @@
 {% extends "accounts/layout.html "%}
+{% load bootstrap4 static %}
+
+
 
 {% block content %}
     <!-- user:
@@ -6,21 +9,31 @@
         -로그아웃: AnonymousUser (파이썬 클래스) 인스턴스 -->
     
     <h2>User: {{ user }} </h2>
-    {% if user.email %}
-        <div>
-            {{user.email}}
-        </div>
-    {% endif %}
 
-    {{user.profile.school}}
-    <br>
-    {{user.profile.student_id}}
-    <div>
-        {% for p in user.profile.userphoto_set.all %}
-            <img src={{p.photo.url}} width="90">
-        {% endfor %}
+    <p>{{user.profile.nickname}}</p>
+    <p>{{user.email}}</p>
+    <p>{{user.profile.school}}</p>
+    <p>{{user.profile.student_id}}</p>
+    
+    <div class="row">
+    {% for p in user.profile.userphoto_set.all %}
+        <div class="col-sm-6">
+            <div class="card" style="width: 8rem;"  style="float:left; ">
+            <img src={{p.photo.url}} class="card-img-top" alt="{{ p.file.image }}">
+                    <div class='card text-right'>
+                        <div class="card-body">
+                            <a href="{{p.photo.url}}" class="card-link">-> click !</a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        {% comment %} <img src={{p.photo.url}}  class="card" alt="{{ p.file.image }}" style="width: 10rem;"> {% endcomment %}
+    {% endfor %}
     </div>
 
-
-    {{ user.is_authenticated }}
+    {% if user.is_authenticated %}
+        <a href="{% url 'accounts:profile_edit' %}" class="btn btn-info">
+            수정
+        </a>
+    {% endif %}
 {% endblock %}

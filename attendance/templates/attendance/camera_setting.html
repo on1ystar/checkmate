@@ -1,0 +1,60 @@
+{% extends 'attendance/layout.html '%}
+{% block style %}
+<style>
+    #container {
+	margin: 50px auto;
+	width: 350px;
+	height: 250px;
+	border: 10px #333 solid;
+    align: center;
+}
+</style>
+{% endblock style %}
+
+{% block content %}
+
+<div id="container">
+	<video autoplay="true" id="videoElementElement"></video>
+</div>
+<div class='align-right'>
+    <button id="start" class='btn-outline-primary'> START </button>     
+    <button id="stop" class='btn-outline-danger'> STOP </button>
+</div>
+{% endblock content %}
+
+<script>
+var video2 = document.getElementById("videoElementElement");
+
+navigator.mediaDevices.getUserMedia({ video2: { facingMode: "user" }  })
+    .then(function (stream) {
+    video2.srcObject = stream;
+    });
+          
+</script>
+
+{% block script %}
+<script>
+  // 웹캠 스트리밍 
+  var video = document.getElementById("videoElement");
+  var startButton = document.getElementById('start');
+  var stopButton = document.getElementById('stop');
+  var videoTracks;
+
+
+      
+  // 스트리밍 스타트
+  startButton.addEventListener('click', function(stream) {
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }  })
+      .then(function (stream) {
+      video.srcObject = stream;
+      videoTracks = stream.getVideoTracks();
+      })
+  });
+
+  // 스트리밍 스탑
+  stopButton.addEventListener('click', function() {
+      videoTracks.forEach(function(track) {track.stop()});
+  });
+
+</script>
+{% endblock script %}

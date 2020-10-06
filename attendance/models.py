@@ -3,8 +3,11 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 from django.urls import reverse
 import uuid
+import os
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 
 # Create your models here.
@@ -20,8 +23,17 @@ class Profile(models.Model):
 
 class UserPhoto(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='checkmate/user', blank=True, verbose_name='얼굴 정면 사진')  # photo.url 로 접근해야 이미지 보임
+    photo = ProcessedImageField(
+        upload_to='user',
+        processors=[ResizeToFill(600,600)], # 처리할 작업 목록
+        options= {'quality': 90 }, # 저장 포맷 관련 옵션 (JPEG 압축률 설정)
+    )  # photo.url 로 접근해야 이미지 보임
 
+    def delete(self, *args, **kwargs):
+        # Delete the model before the file
+        super(UserPhoto, self).delete(*args, **kwargs)
+        # Delete the file after the model
+        os.remove(os.path.join(settings.MEDIA_ROOT, self.photo.name))
 
 class Classroom(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

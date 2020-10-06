@@ -54,14 +54,14 @@ def classroom_delete(request, uuid):
     if request.method == 'POST':
         classroom.delete()
         messages.success(request, 'classroom을 삭제했습니다.')
-        return redirect('attendance:classroom_list', request.user.pk)
+        return redirect('attendance:classroom_list')
     return render(request, 'attendance/classroom_confirm_delete.html',{
         'classroom': classroom,
     })
 
 @login_required
-def classroom_list(request, pk):
-    role_list = Role.objects.select_related('user').select_related('classroom').filter(user=pk)
+def classroom_list(request):
+    role_list = Role.objects.select_related('user').select_related('classroom').filter(user=request.user.pk)
     return render(request, 'attendance/classroom_list.html',{
         'role_list': role_list
     })
@@ -72,6 +72,11 @@ def classroom_detail(request, uuid, is_checker):
     return render(request, 'attendance/classroom_detail.html',{
         'classroom': classroom,
         'is_checker': is_checker,
+    })
+
+def camera_setting(request):
+    return render(request, 'attendance/camera_setting.html',{
+
     })
 
 # 로그인 user가 checker일 경우 
@@ -89,10 +94,9 @@ get object
 get templete
 dispatch -> render
 
-로그인
 회원가입
-마이페이지
 
+얼굴인식 설정
 클래스 참여
 클래스 참여 수락/거절
 출석관리

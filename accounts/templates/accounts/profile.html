@@ -7,28 +7,33 @@
     <!-- user:
         -로그인: User 모델 인스턴스
         -로그아웃: AnonymousUser (파이썬 클래스) 인스턴스 -->
+<div class="container"> 
+    <h4>User ID: {{ user }} </h4>
+    <br>
+    <p>닉네임: {{user.profile.nickname}}</p>
+    <p>이메일: {{user.email}}</p>
+    <p>학교/소속: {{user.profile.school}}</p>
+    <p>학번/학년/반: {{user.profile.student_id}}</p>
     
-    <h2>User: {{ user }} </h2>
-
-    <p>{{user.profile.nickname}}</p>
-    <p>{{user.email}}</p>
-    <p>{{user.profile.school}}</p>
-    <p>{{user.profile.student_id}}</p>
-    
-    <div class="row">
-    {% for p in user.profile.userphoto_set.all %}
-        <div class="col-sm-6">
-            <div class="card" style="width: 8rem;"  style="float:left; ">
+    photo
+    <div class="row" >
+        {% for p in user.profile.userphoto_set.all %}
+        <div style="float:left;">
+            <div class="card" style="width: 9rem; margin: 1rem;">
             <img src={{p.photo.url}} class="card-img-top" alt="{{ p.file.image }}">
                     <div class='card text-right'>
                         <div class="card-body">
+                            <div class='card-text text-left'>
+                                {{ p.photo.name}}
+                            </div>
                             <a href="{{p.photo.url}}" class="card-link">-> click !</a>
                         </div>
                     </div>
             </div>
         </div>
+        {% endfor %}
         {% comment %} <img src={{p.photo.url}}  class="card" alt="{{ p.file.image }}" style="width: 10rem;"> {% endcomment %}
-    {% endfor %}
+    
     </div>
 
     {% if user.is_authenticated %}
@@ -36,4 +41,5 @@
             수정
         </a>
     {% endif %}
+</div>
 {% endblock %}

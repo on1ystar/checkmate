@@ -1,12 +1,16 @@
 {% extends "layout.html" %}
+{% load bootstrap4 static %}
 
 {% block title %}
     Checkmate. 
 {% endblock title%}
 
 {% block content %}
-<div class="container-fluid p-0">
-    <!-- About-->
+
+<div class="container">
+    <div class="row">
+    <div class="col-sm-6">
+     <!-- About-->
     <section class="resume-section" id="main">
         <div class="resume-section-content">
             <h1 class="mb-0">
@@ -19,6 +23,105 @@
             </div>
             <p class="lead mb-5">딥러닝 기반의 얼굴 인식을 활용한 출석 체크 Web Service</p>
         </div>
-    </section>
+    </section> 
+        <div class="box" style="background: #BDBDBD;">
+            <img class="profile" src="{% static 'img/profile.JPG' %}">
+
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <form class="navbar-search float-right">
+            <input type="text" class="search-query"  placeholder="검색">
+            <a class="btn btn-info btn-sm">검색</a>
+        </form>
+        <span class="chart" data-percent="86">
+            <span class="percent"></span>
+        </span> <!--실행안됨흑흑-->
+        <fieldset>
+            <a href="#"><img class="button_checker" id="b1" src="{% static 'img/button_1.png' %}" alt="버튼1"></a>
+            <a href="#"><img class="button_checker" id="b2" src="{% static 'img/button_2.png' %}" alt="버튼2"></a>
+        </fieldset>
+        <hr> 
+        <fieldset style="width:100%">
+        <legend>NOTICE</legend>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>날짜</th>
+            <th>조회수</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <td>4</td>
+            <td>안녕하세요? 체크메이트입니다.</td>
+            <td>checkmate</td>
+            <td>20-10-05</td>
+            <td>1005</td>
+            </tr>
+            <tr>
+            <td>3</td>
+            <td>nice to meet you~!~!</td>
+            <td>checkmate</td>
+            <td>20-10-04</td>
+            <td>100</td>
+            </tr>
+            <tr>
+            <td>2</td>
+            <td>hello world~</td>
+            <td>checkmate</td>
+            <td>20-10-03</td>
+            <td>12</td>
+            </tr>
+            <tr>
+            <td>1</td>
+            <td>gkrltlfhek..</td>
+            <td>checkmate</td>
+            <td>20-10-02</td>
+            <td>0</td>
+            </tr>
+            </tbody>
+        </table>
+        </fieldset>
+        <a class="btn btn-info float-right btn-sm">더보기</a>
+        <div class="text-center">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+        </ul>
+        </div>
+    </div>
+    </div>
 </div>
 {% endblock content %}
+
+<script>
+$(function() {
+    $('.chart').easyPieChart({
+    barColor: '#ef1e25',
+    trackColor: '#f9f9f9',
+    scaleColor: '#dfe0e0',
+    scaleLength: 5,
+    lineCap: 'round',
+    lineWidth: 3,
+    trackWidth: undefined,
+    size: 110,
+    rotate: 0, // in degrees
+    animate: {
+        duration: 1000,
+        enabled: true
+    },
+    easing: function (x, t, b, c, d) { // easing function
+        t = t / (d/2);
+        if (t < 1) {
+        return c / 2 * t * t + b;
+        }
+        return -c/2 * ((—t)*(t-2) - 1) + b;
+    }
+    });
+});
+</script>

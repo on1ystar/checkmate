@@ -2,20 +2,21 @@
 {% load bootstrap4 static%}
 
 {% block content %}
+    <div class='container'>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form profile_form %}
         {% bootstrap_formset photo_formset layout='horizontal' %}
         {% buttons %}
-            <button class="btn btn-success">
+            <button class="btn btn-success" >
                 저장
             </button>
+            
+            <a href="{% url 'accounts:profile' %}" class="btn btn-danger"  >
+                취소
+            </a>
         {% endbuttons %}
     </form>
-    <hr/>
-    
+    </div>
 
-    <a href="{% url 'accounts:profile' %}" class="btn btn-danger">
-        취소
-    </a>
 {% endblock %}

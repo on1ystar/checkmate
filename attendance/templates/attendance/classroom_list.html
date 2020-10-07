@@ -1,20 +1,21 @@
 {% extends "attendance/layout.html"  %}
-
+{% load static bootstrap4 %}
 {% block title %}
     My classroom
 {% endblock title %}
-
 {% block content %}
     <!-- <form action="" method="get"> multipart/form-data request.FILES
         <input type="text", name="q"/>
         <input type="submit" value="검색" />
     </form> -->
-
-    <a href="{% url 'attendance:classroom_new' %}" class="btn btn-primary mt-3 mb-3 align-right">
-        new classroom
-    </a>
-
-    <table class="table table-bordered table-hover">
+<div class="container">
+    <fieldset>
+        <a href="{% url 'attendance:classroom_new' %}">
+            <img class="button_checker" style="width: 15%; float:right"  id="b1" src="{% static 'img/button_1.png' %}" alt="버튼1"></a>
+            <img class="button_checker" style="width: 15%; float:right"  id="b2" src="{% static 'img/button_2.png' %}" alt="버튼1"></a>
+        </a>
+    </fieldset>
+    <table class="table table-bordered table-hover" style="margin-top: 1rem">
         <tbody>
             {% for role in role_list %}
                 <tr>
@@ -42,4 +43,5 @@
             {% endfor %}
         </tbody>
     </table>
+</div>
 {% endblock content %}

@@ -14,8 +14,8 @@ from imagekit.processors import ResizeToFill
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=20, blank=True , default='guest', verbose_name='닉네임')
-    school = models.CharField(max_length=20, verbose_name='소속 학교or기관')
-    student_id = models.CharField(max_length=20, blank=True, verbose_name='학번or학년/반')
+    school = models.CharField(max_length=20, verbose_name='소속학교/학과 or 기관')
+    student_id = models.CharField(max_length=20, blank=True, verbose_name='학번 or 학년/반')
     classroom_set = models.ManyToManyField('Classroom', blank=True, through='Role')
 
     def __str__(self):
@@ -24,6 +24,7 @@ class Profile(models.Model):
 class UserPhoto(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     photo = ProcessedImageField(
+        verbose_name='얼굴 정면 사진', 
         upload_to='user',
         processors=[ResizeToFill(600,600)], # 처리할 작업 목록
         options= {'quality': 90 }, # 저장 포맷 관련 옵션 (JPEG 압축률 설정)

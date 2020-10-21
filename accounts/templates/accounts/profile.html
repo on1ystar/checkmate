@@ -1,4 +1,4 @@
-{% extends "accounts/layout.html "%}
+{% extends "accounts/layout.html"%}
 {% load bootstrap4 static %}
 
 
@@ -12,8 +12,8 @@
     <br>
     <p>닉네임: {{user.profile.nickname}}</p>
     <p>이메일: {{user.email}}</p>
-    <p>학교/소속: {{user.profile.school}}</p>
-    <p>학번/학년/반: {{user.profile.student_id}}</p>
+    <p>학교 or 소속: {{user.profile.school}}</p>
+    <p>학번 or 학년/반: {{user.profile.student_id}}</p>
     
     photo
     <div class="row" >

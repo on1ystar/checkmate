@@ -7,25 +7,31 @@
 {% block content %}
     <div>
         <p>uuid:  {{classroom.uuid}}</p>
-        <p> classroom name:{{classroom.name}} </p> 
+        <p>classroom name:{{classroom.name}} </p>
+        <p>checker:{{checker.nickname}} </p>
+        <p>checker's email:{{checker.user.email}} </p>
         <p>소개: {{classroom.desc|linebreaks}}</p>
         <p>제한인원: {{classroom.personnel}}</p> 
         <p>자리비움 제한 시간: {{classroom.timer}}</p>
         <p>생성일: {{classroom.created_at}}</p> 
     </div>
 
-    <a href="{% url 'attendance:classroom_list' %}" class="btn btn-primary">
-        목록
-    </a>
-
-    {% if is_checker == 'True' %}
-        <a href="{% url 'attendance:classroom_edit' classroom.uuid %}" class="btn btn-info">
-            수정
+    {% if is_checker == 'enroll' %}
+        <a href="{% url 'attendance:classroom_list' %}" class="btn btn-primary">
+            신청
         </a>
-
-        <a href="{% url 'attendance:classroom_delete' classroom.uuid %}" class="btn btn-danger">
-            삭제
+    {% else %}
+        <a href="{% url 'attendance:classroom_list' %}" class="btn btn-primary">
+            목록
         </a>
+        {% if is_checker == 'True' %}
+            <a href="{% url 'attendance:classroom_edit' classroom.uuid %}" class="btn btn-info">
+                수정
+            </a>
+
+            <a href="{% url 'attendance:classroom_delete' classroom.uuid %}" class="btn btn-danger">
+                삭제
+            </a>
+        {% endif %}
     {% endif %}
-    
 {% endblock content %}

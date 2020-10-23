@@ -2,6 +2,7 @@
 {% load bootstrap4 %}
 
 {% block content %}
+<div class='container'>
     <form action="" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
@@ -12,16 +13,15 @@
             <button class="btn btn-success">
                 저장
             </button>
+            {% if classroom %}
+                <a href="{{classroom.get_absolute_url}}" class="btn btn-danger" >
+                    취소
+                </a>
+            {% endif %}
+            <a href="{% url 'attendance:classroom_list'%}" class="btn btn-primary">
+                목록
+            </a>
         {% endbuttons %}
     </form>
-    <hr/>
-    
-    {% if classroom %}
-        <a href="{{classroom.get_absolute_url}}" class="btn btn-danger" >
-            취소
-        </a>
-    {% endif %}
-    <a href="{% url 'attendance:classroom_list'%}" class="btn btn-primary">
-        목록
-    </a>
+</div>
 {% endblock %}

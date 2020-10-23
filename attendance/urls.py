@@ -10,5 +10,6 @@ urlpatterns =[
     path('classroom_detail/<uuid:uuid>/<str:is_checker>', views.classroom_detail, name= 'classroom_detail'),
     path('classroom/<uuid:uuid>/edit', views.classroom_edit, name= 'classroom_edit'),
     path('classroom/<uuid:uuid>/delete', views.classroom_delete, name= 'classroom_delete'),
-    path('camera_setting', views.camera_setting, name ='camera_setting')
+    path('camera_setting', views.camera_setting, name ='camera_setting'),
+    path('classroom_enroll', views.classroom_enroll, name='classroom_enroll'),
 ]

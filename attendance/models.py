@@ -67,6 +67,11 @@ class Role(models.Model):
     class Meta:
         ordering = ['classroom', 'is_checker', '-user' ]
 
+class ClassroomEnroll(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)
+    msg = models.TextField(blank=True, verbose_name='요청 메세지')
+
 class Attendance(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     classroom = models.ForeignKey(Classroom, on_delete=models.CASCADE)

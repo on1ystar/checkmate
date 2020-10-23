@@ -1,34 +1,174 @@
 .container{
-    margin: 60px auto;
-    padding: 15px;
+    margin: 50px auto;
+    padding: 30px;
     border: 1px solid #bcbcbc;
 }
 
 .box {
-    width: 140px;
-    height: 140px;
+    max-width: 100%;
+    float: center;
     border-radius: 70%;
+    margin: 10px auto;
     overflow: hidden;
 }
+
 .profile {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+
+.box2{
+  margin-top: 40px;
+}
+
+.g_int{
+  text-align: center;
+}
+
+.nm {
+  font-size: 50px;
+}
+
 .table {
   font-size: 75%;
 }
 
-.button_checker {
-    width: 60%;
-    height: 60%;
+.graph1, .graph2{
+  margin: 15px;
 }
 
-#b1 {
+.button_checker {
+    width: 50%;
+    height: 50%;
+    padding: 5px;
     float: left;
 }
 
-#b2{
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+@keyframes bake-pie {
+  from {
+    transform: rotate(0deg) translate3d(0,0,0);
+  }
+}
+
+.pieID, .pieID2{
+  display: inline-block;
+  vertical-align: top;
+}
+.pie, .pie2{
+  height: 200px;
+  width: 200px;
+  position: relative;
+  margin: 0 30px 30px 0;
+}
+.pie::before, .pie2::before{
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  background: #EEE;
+  border-radius: 50%;
+  top: 50px;
+  left: 50px;
+}
+.pie::after, .pie2::after{
+  content: "";
+  display: block;
+  width: 120px;
+  height: 2px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 50%;
+  box-shadow: 0 0 3px 4px rgba(0,0,0,0.1);
+  margin: 220px auto;
+
+}
+.slice, .slice2 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  clip: rect(0px, 200px, 200px, 100px);
+  animation: bake-pie 1s;
+}
+.slice span, .slice2 span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  clip: rect(0px, 200px, 200px, 100px);
+}
+
+.legend, .legend2 {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: #FFF;
+  padding: 15px;
+  font-size: 13px;
+  box-shadow: 1px 1px 0 #DDD,
+              2px 2px 0 #BBB;
+}
+.legend li, .legend2 li {
+  width: 110px;
+  height: 1.25em;
+  margin-bottom: 0.7em;
+  padding-left: 0.5em;
+  border-left: 1.25em solid black;
+}
+.legend em, .legend2 em {
+  font-style: normal;
+}
+.legend span, .legend2 span {
   float: right;
+}
+
+.searchbar{
+margin-bottom: auto;
+margin-top: auto;
+height: 50px;
+background-color: #353b48;
+border-radius: 30px;
+padding: 5px;
+}
+
+.search_input{
+color: white;
+border: 0;
+outline: 0;
+background: none;
+width: 0;
+caret-color:transparent;
+line-height: 40px;
+transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search_input{
+padding: 0 10px;
+width: 80%;
+transition: width 0.4s linear;
+}
+
+.searchbar:hover > .search_icon{
+background: white;
+color: #e74c3c;
+}
+
+.search_icon{
+height: 40px;
+width: 40px;
+float: right;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 50%;
+color:white;
+text-decoration:none;
 }

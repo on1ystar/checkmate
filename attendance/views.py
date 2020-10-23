@@ -69,15 +69,33 @@ def classroom_list(request):
 @login_required
 def classroom_detail(request, uuid, is_checker):
     classroom = get_object_or_404(Classroom, uuid= uuid)
+    checker = Role.objects.all().filter(classroom=classroom).get(is_checker=True).user
     return render(request, 'attendance/classroom_detail.html',{
         'classroom': classroom,
         'is_checker': is_checker,
+        'checker': checker,
     })
 
 def camera_setting(request):
     return render(request, 'attendance/camera_setting.html',{
 
     })
+
+@login_required
+def classroom_enroll(request):
+    classroom_list = Classroom.objects.all()
+    if request.method == 'GET':
+        q = request.GET.get('q', '')    
+        if q:
+            qs = classroom_list.filter(name__icontains=q)
+            Role.objects.all().filter()
+        else:
+            qs = None
+
+    return render(request, 'attendance/classroom_enroll.html',{
+        'classroom_list': qs,
+    })
+
 
 # 로그인 user가 checker일 경우 
 @login_required

@@ -1,0 +1,106 @@
+{% extends "attendance/layout.html" %}
+{% load static bootstrap4 %}
+{% block style %}
+<style>
+    button{
+    border-style: none;
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background:  #353b48;
+    }
+
+    .searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #353b48;
+    border-radius: 30px;
+    padding: 10px;
+    }
+
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 450px;
+    caret-color:red;
+    line-height: 40px;
+    transition: w   idth 0.4s linear;
+    }
+
+    .searchbar:hover > .search_input{
+    padding: 0 10px;
+    width: 450px;
+    caret-color:red;
+    transition: width 0.4s linear;
+    }
+
+    .search_icon{
+    margin-right: 5px;
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    text-decoration:none;
+    }
+    
+</style>
+{% endblock style %}
+{% block content %}
+
+<div class='container'>
+    <div class='row-cols-xl-2'>
+      <div class="justify-content-center">
+        <form action="" method="get">
+            <div class="searchbar">
+                <input class="search_input" type="text" name="q" placeholder="Search...">
+                <button  type="submit" >
+                    <a href="" class="search_icon"><i class="fas fa-search"></i></a>
+                </button>
+            </div>
+        <form>
+      </div>
+    </div>
+    <table class="table table-bordered table-hover" style="margin-top: 1rem">
+        <thead  class="thead-dark">
+            <tr>
+            <th scope="col">classroom name</th>
+            <th scope="col">classroom uuid</th>
+            <th scope="col">checker</th>
+            <th scope="col">desc</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for classroom in classroom_list %}
+                <tr>
+                    <td>
+                        <a href= "" >
+                            {{ classroom.name }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ classroom.uuid }}
+                    </td>
+                    <td>
+                        {{ classroom.role_set.last.user}}
+                    </td>
+                    <td>
+                        {{ classroom.desc }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

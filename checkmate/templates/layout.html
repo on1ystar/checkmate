@@ -7,13 +7,16 @@
     <title>    {% block title %}{% endblock title %}   </title>
     <script src="{% static 'jquery-3.5.1.min.js'%}"></script>
     <script src="{% static 'jquery.csrf.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap-4.5.2-dist/css/testt.css'%}">
     <link rel="stylesheet" href="{% static 'bootstrap-4.5.2-dist/css/bootstrap.css'%}">
+    <link rel="stylesheet" href="{% static 'bootstrap-4.5.2-dist/css/bootstrap-grid.css'%}">
     <script src="{% static 'bootstrap-4.5.2-dist/js/bootstrap.js'%}"></script>
+
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
+    {% comment %} <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" /> {% endcomment %}
     <style>
         #body-row {
         margin-left:0;
@@ -81,42 +84,30 @@
         body{
             padding-top: 3.5rem;
         }
-        .container{
-            margin: 20px auto;
         
-            padding: 10px;
-            border: 1px solid #bcbcbc;
+        @media (min-width: 576px) {
+          .container, .container-sm {
+            max-width: 540px;
+          }
         }
 
-        .box {
-            width: 140px;
-            height: 140px;
-            border-radius: 70%;
-            overflow: hidden;
-        }
-        .profile {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        @media (min-width: 768px) {
+          .container, .container-sm, .container-md {
+            max-width: 720px;
+          }
         }
 
-        .table {
-          font-size: 75%;
+        @media (min-width: 992px) {
+          .container, .container-sm, .container-md, .container-lg {
+            max-width: 960px;
+          }
         }
 
-        .button_checker {
-            width: 60%;
-            height: 60%;
+        @media (min-width: 1200px) {
+          .container, .container-sm, .container-md, .container-lg, .container-xl {
+            max-width: 1500px;
+          }
         }
-
-        #b1 {
-            float: left;
-        }
-
-        #b2{
-          float: right;
-        }
-     
 
     </style>
     {% block style %}{% endblock style %}

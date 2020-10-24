@@ -28,13 +28,14 @@
 anaconda: <https://www.anaconda.com/>  
 
 ```python 3.7(anaconda env) >conda create -n [환경명] python=3.7```  
-```pip install dlib``` <https://pypi.org/project/dlib/>  
+```pip install mtcnn``` <https://pypi.org/project/mtcnn/>  
 ```pip install opencv-python``` <https://pypi.org/project/opencv-python/>
-
+```pip install keras``` <https://github.com/nyoki-mtl/keras-facenet>
+```pip install sklearn```
 <br>
 
 ## 현재 진행하고 있는 단계
-동양인(주로 한국인) 인식을 위한 data set 수집 & 신경망 모델링 고민
+얼굴인식 
 <br>
 <br>
 <br>

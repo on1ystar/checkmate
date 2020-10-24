@@ -33,6 +33,8 @@ anaconda: <https://www.anaconda.com/>
 ```pip install keras``` <https://github.com/nyoki-mtl/keras-facenet>
 ```pip install sklearn```
 <br>
+<br>
+
 
 ## 현재 진행하고 있는 단계
 얼굴인식 

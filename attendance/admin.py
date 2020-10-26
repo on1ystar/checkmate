@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Attendance, Role, Classroom, UserPhoto
+from .models import Profile, Attendance, Role, Classroom, UserPhoto, ClassroomEnroll
 from django.conf import settings
 from django.contrib.auth.models import User
 
@@ -22,6 +22,10 @@ class AttendanceAdmin(admin.ModelAdmin):
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
     list_display = ['user', 'classroom', 'is_checker']
+
+@admin.register(ClassroomEnroll)
+class ClassroomEnrollAdmin(admin.ModelAdmin):
+    list_display = ['user', 'classroom', 'msg']
 
 @admin.register(UserPhoto)
 class UserPhotoAdmin(admin.ModelAdmin):

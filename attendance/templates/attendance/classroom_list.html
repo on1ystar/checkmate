@@ -10,12 +10,22 @@
     </form> -->
 <div class="container">
     <fieldset>
+        <a href="{% url 'attendance:classroom_enroll' %}">
+            <img class="button_checker" style="width: 15%; float:right"  id="b2" src="{% static 'img/button_2.png' %}" alt="new checker"></a>
+        </a>
         <a href="{% url 'attendance:classroom_new' %}">
-            <img class="button_checker" style="width: 15%; float:right"  id="b1" src="{% static 'img/button_1.png' %}" alt="버튼1"></a>
-            <img class="button_checker" style="width: 15%; float:right"  id="b2" src="{% static 'img/button_2.png' %}" alt="버튼1"></a>
+            <img class="button_checker" style="width: 15%; float:right"  id="b1" src="{% static 'img/button_1.png' %}" alt="new mate"></a>
         </a>
     </fieldset>
     <table class="table table-bordered table-hover" style="margin-top: 1rem">
+        <thead  class="thead-dark">
+            <tr>
+            <th scope="col">classroom name</th>
+            <th scope="col">classroom uuid</th>
+            <th scope="col">인원 제한</th>
+            <th scope="col">checker/mate</th>
+            </tr>
+        </thead>
         <tbody>
             {% for role in role_list %}
                 <tr>

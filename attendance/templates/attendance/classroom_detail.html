@@ -5,6 +5,7 @@
 {% endblock title %}
 
 {% block content %}
+<div class="container">
     <div>
         <p>uuid:  {{classroom.uuid}}</p>
         <p>classroom name:{{classroom.name}} </p>
@@ -16,22 +17,22 @@
         <p>생성일: {{classroom.created_at}}</p> 
     </div>
 
-    {% if is_checker == 'enroll' %}
-        <a href="{% url 'attendance:classroom_list' %}" class="btn btn-primary">
-            신청
-        </a>
-    {% else %}
-        <a href="{% url 'attendance:classroom_list' %}" class="btn btn-primary">
-            목록
-        </a>
-        {% if is_checker == 'True' %}
-            <a href="{% url 'attendance:classroom_edit' classroom.uuid %}" class="btn btn-info">
-                수정
-            </a>
 
-            <a href="{% url 'attendance:classroom_delete' classroom.uuid %}" class="btn btn-danger">
-                삭제
-            </a>
-        {% endif %}
+    <a href="{% url 'attendance:classroom_list' %}" class="btn btn-primary">
+        목록
+    </a>
+    {% if is_checker == 'True' %}
+        <a href="{% url 'attendance:classroom_edit' classroom.uuid %}" class="btn btn-info">
+            수정
+        </a>
+
+        <a href="{% url 'attendance:classroom_delete' classroom.uuid %}" class="btn btn-danger">
+            삭제
+        </a>
+
+        <a href="{% url 'attendance:classroom_enroll_list' classroom.uuid %}" class="btn btn-link">
+            Mate 신청 목록
+        </a>
     {% endif %}
+</div>
 {% endblock content %}

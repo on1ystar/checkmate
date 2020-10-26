@@ -68,7 +68,20 @@
         border-top-left-radius: 0;
         border-top-right-radius: 0;
       }
-      
+
+      .parent{
+          width: 100%;
+      }
+
+      .first {
+          width:100%;
+          margin-bottom: 5px;
+      }
+
+      .second{
+          width:100%;
+      }
+          
 </style>
 </head>
 
@@ -135,27 +148,32 @@
       </form> {% endcomment %}
     </div>
   </nav>
-    <div class="col">
-  <form class="form-signin" action=""method="post" >
-    {% csrf_token %}
-    <center><img class="mb-4" src= "{% static "img/logo.png" %}"  alt="" width="150" height="150"></center>
-    <center><h2 class="h3 mb-3 font-weight-normal">Please login</h2></center>
+  <div class="container">
+      <div class="text-center" style="padding:50px 0">
+        <div class="col">
+          <form class="form-signin" action=""method="post" >
+            {% csrf_token %}
+            <center><img class="mb-4" src= "{% static "img/logo.png" %}"  alt="" width="150" height="150"></center>
+            <center><h2 class="h3 mb-3 font-weight-normal">Please Login</h2></center>
 
-      <label for="{{ form.email.id_for_label }}" class="sr-only">Email address</label>
-      <input type="email" id="{{ form.email.id_for_label }}" class="form-control" placeholder="Email address" 
-        name="{{ form.email.html_name }}" required="" autofocus="">
-      <label for="{{ form.password.id_for_label }}" class="sr-only">Password</label>
-      <input type="password" id="{{ form.password.id_for_label }}" class="form-control" 
-        name="{{ form.password.html_name }}" placeholder="Password" required="">
+              <label for="{{ form.email.id_for_label }}" class="sr-only">Email address</label>
+              <input type="email" id="{{ form.email.id_for_label }}" class="form-control" placeholder="Email address" 
+                name="{{ form.email.html_name }}" required="" autofocus="">
+              <label for="{{ form.password.id_for_label }}" class="sr-only">Password</label>
+              <input type="password" id="{{ form.password.id_for_label }}" class="form-control" 
+                name="{{ form.password.html_name }}" placeholder="Password" required="">
 
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-    </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-  </form>
+            <div class="parent">
+                <button class="btn btn-primary btn-block first" type="submit" sytle=" float: left;">Login</button>
+                <a href="{% url 'accounts:sign_up' %}" class="btn btn-info second" sytle=" float: left;">
+                  Sign Up
+                </a>
+            </div>
+          </form>
         <hr/>
       &copy; CheckMate.
   </div>
+      </div>
+    </div>
+    {% comment %}  {% endcomment %}
 </body>

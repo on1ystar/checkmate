@@ -1,0 +1,58 @@
+{% extends "attendance/layout.html" %}
+{% load bootstrap4 static %}
+
+{% block content %}
+
+<div class='container'>
+
+    <table class="table table-bordered table-hover" style="margin-top: 1rem">
+        <thead  class="thead-dark">
+            <tr>
+            <th scope="col">닉네임</th>
+            <th scope="col">이메일</th>
+            <th scope="col">학교 or 소속</th>
+            <th scope="col">학번 or 학년/반</th>
+            <th scope="col">메세지</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enroll in classroom_enroll_list %}
+                <tr>
+                    <td>
+                        {{ enroll.user.nickname }}
+                    </td>
+                    <td>
+                        {{ enroll.user.user.email }}
+                    </td>
+                    <td>
+                        {{ enroll.user.school }}
+                    </td>
+                    <td>
+                        {{ enroll.user.student_id }}
+                    </td>
+                    <td>
+                        {{ enroll.msg }}
+                    </td>
+                    <td >
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-outline-primary active">
+                                <input type="radio" name="accept" id="{{ enroll.user }}" autocomplete="off" checked> 수락
+                            </label>
+                            <label class="btn btn-outline-danger">
+                                <input type="radio" name="reject" id="{{ enroll.user }}" autocomplete="off"> 거절
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-secondary btn-lg btn-block">Complete ! </button>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script>
+
+</script>
+{% endblock script %}

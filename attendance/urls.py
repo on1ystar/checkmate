@@ -12,4 +12,6 @@ urlpatterns =[
     path('classroom/<uuid:uuid>/delete', views.classroom_delete, name= 'classroom_delete'),
     path('camera_setting', views.camera_setting, name ='camera_setting'),
     path('classroom_enroll', views.classroom_enroll, name='classroom_enroll'),
+    path('classroom_enroll_list/<uuid:uuid>', views.classroom_enroll_list, name='classroom_enroll_list'),
+
 ]

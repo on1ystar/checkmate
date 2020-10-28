@@ -13,5 +13,5 @@ urlpatterns =[
     path('camera_setting', views.camera_setting, name ='camera_setting'),
     path('classroom_enroll', views.classroom_enroll, name='classroom_enroll'),
     path('classroom_enroll_list/<uuid:uuid>', views.classroom_enroll_list, name='classroom_enroll_list'),
-
+    path('classroom_enroll_ajax/<uuid:uuid>', views.classroom_enroll_ajax, name='classroom_enroll_ajax'),
 ]

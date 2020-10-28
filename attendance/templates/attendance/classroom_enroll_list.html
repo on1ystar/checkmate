@@ -17,42 +17,72 @@
         </thead>
         <tbody>
             {% for enroll in classroom_enroll_list %}
-                <tr>
-                    <td>
+                <tr name='enroll_list' id="{{ enroll.user }}">
+                    <td name='nickname'>
                         {{ enroll.user.nickname }}
                     </td>
-                    <td>
+                    <td name='email'>
                         {{ enroll.user.user.email }}
                     </td>
-                    <td>
+                    <td name='school'>
                         {{ enroll.user.school }}
                     </td>
-                    <td>
+                    <td name='student_id'>
                         {{ enroll.user.student_id }}
                     </td>
-                    <td>
+                    <td name='msg'>
                         {{ enroll.msg }}
                     </td>
-                    <td >
+                    <td name='enroll_btn' >
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                             <label class="btn btn-outline-primary active">
-                                <input type="radio" name="accept" id="{{ enroll.user }}" autocomplete="off" checked> 수락
+                                <input type="radio"  name="accept" autocomplete="off"> 수락
                             </label>
                             <label class="btn btn-outline-danger">
-                                <input type="radio" name="reject" id="{{ enroll.user }}" autocomplete="off"> 거절
+                                <input type="radio"  name="reject" autocomplete="off"> 거절
                             </label>
                         </div>
                     </td>
-                </tr>
+                </tr>   
             {% endfor %}
         </tbody>
     </table>
-    <button type="button" class="btn btn-secondary btn-lg btn-block">Complete ! </button>
+    <button type="button" id="complete" class="btn btn-secondary btn-lg btn-block">Complete ! </button>
 </div>
 {% endblock content %}
 
 {% block script %}
 <script>
+var user_list = {};
+var enroll_list= document.getElementsByName('enroll_list');
+var button_id= 'complete';
 
+$(function(){
+    $("#" + button_id).click(function(e){
+        e.preventDefault();
+        for(var i=0;i<enroll_list.length;i++)
+        {  
+            if(enroll_list[i].getElementsByTagName('input').accept.checked == true){
+                user_list[enroll_list[i].id] = 'True'
+            }
+            else if(enroll_list[i].getElementsByTagName('input').reject.checked == true){
+                user_list[enroll_list[i].id] = 'False'
+            }
+            else{
+                user_list[enroll_list[i].id] = 'None'
+            }
+        }
+        $.ajax({
+            url:"{% url 'attendance:classroom_enroll_ajax' classroom_uuid %}",
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(user_list),
+            dataType:'text',
+            success:function(result){
+                alert("success!");
+            }
+        })
+    });
+});
 </script>
 {% endblock script %}

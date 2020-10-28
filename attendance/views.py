@@ -5,6 +5,7 @@ from .models import Profile, UserPhoto, Classroom, Role, ClassroomEnroll
 from .forms import ClassroomForm, RoleForm, ClassroomEnrollForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+import json
 
 # Create your views here.
 @login_required
@@ -87,8 +88,7 @@ def classroom_enroll(request):
     if request.method == 'GET':
         q = request.GET.get('q', '')    
         if q:
-            qs = classroom_list.filter(name__icontains=q)
-            Role.objects.all().filter()
+            qs = classroom_list.filter(name__icontains=q).exclude(profile=request.user.pk)
         else:
             qs = None
     elif request.method == 'POST':
@@ -113,8 +113,31 @@ def classroom_enroll_list(request, uuid):
 
     return render(request, 'attendance/classroom_enroll_list.html', {
         'classroom_enroll_list': classroom_enroll_list,
+        'classroom_uuid': uuid,
     })
 
+@login_required
+def classroom_enroll_ajax(request, uuid):
+    if request.method == 'POST':
+        for user, check in json.loads(request.body.decode("utf-8")).items():
+            user = get_object_or_404(Profile, user=get_object_or_404(User, username=user))
+            classroom = get_object_or_404(Classroom, uuid=uuid)
+            if check == 'True':
+                form_role = RoleForm()
+                role = form_role.save(commit=False)
+                role.user = user
+                role.classroom = classroom
+                role.is_checker = False
+                role.save()
+            ClassroomEnroll.objects.all().filter(user=user, classroom=classroom).delete()
+
+        classroom_enroll_list = ClassroomEnroll.objects.all().filter(classroom=uuid)
+        return render(request, 'attendance/classroom_enroll_list.html', {
+        'classroom_enroll_list': classroom_enroll_list,
+        'classroom_uuid': uuid,
+    })
+
+    
 # 로그인 user가 checker일 경우 
 @login_required
 def mate_list(request, pk):  # pk = user의 pk 

@@ -71,10 +71,12 @@ def classroom_list(request):
 def classroom_detail(request, uuid, is_checker):
     classroom = get_object_or_404(Classroom, uuid= uuid)
     checker = Role.objects.all().filter(classroom=classroom).get(is_checker=True).user
+    role_list = classroom.role_set.all().exclude(user=checker)
     return render(request, 'attendance/classroom_detail.html',{
         'classroom': classroom,
         'is_checker': is_checker,
         'checker': checker,
+        'role_list': role_list,
     })
 
 def camera_setting(request):
@@ -137,26 +139,7 @@ def classroom_enroll_ajax(request, uuid):
         'classroom_uuid': uuid,
     })
 
-    
-# 로그인 user가 checker일 경우 
-@login_required
-def mate_list(request, pk):  # pk = user의 pk 
-    pass
-
-
 '''
-model._meta.model_name
-model._meta.app_lable
-
-FBV or CBV
-get object
-get templete
-dispatch -> render
-
-회원가입
-
 얼굴인식 설정
-클래스 참여
-클래스 참여 수락/거절
 출석관리
 '''

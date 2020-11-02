@@ -3,23 +3,84 @@
 {% block title %}
     {{classroom.name}}
 {% endblock title %}
-
 {% block content %}
 <div class="container">
-    <div>
-        <p>uuid:  {{classroom.uuid}}</p>
-        <p>classroom name:{{classroom.name}} </p>
-        <p>checker:{{checker.nickname}} </p>
-        <p>checker's email:{{checker.user.email}} </p>
-        <p>소개: {{classroom.desc|linebreaks}}</p>
-        <p>제한인원: {{classroom.personnel}}</p> 
-        <p>자리비움 제한 시간: {{classroom.timer}}</p>
-        <p>생성일: {{classroom.created_at}}</p> 
+    <h3 class="card-header text-white bg-dark mb-3">{{classroom.name}}</h3>
+    <br>
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">uuid</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                    {{classroom.uuid}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">소개</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                    {{classroom.desc|linebreaks}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">제한인원</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                    {{classroom.personnel}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">자리비움 제한 시간</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                    {{classroom.timer}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">생성일</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                    {{classroom.created_at}}
+                </div>
+              </div>
+            </div>
+        </div>
     </div>
 
-
+    <div class="container-sm">
+    <h3>Mate Group</h3>
+    <fieldset class= "noti" >
+        <table class="table table-hover">
+            <tbody>
+                {% for role in role_list %}
+                    <tr>
+                    <td>{{ role.user.nickname}}</td>
+                    <td>{{ role.user.user.email}}</td>
+                    <td>{{ role.user.school}}</td>
+                    <td>{{ role.user.student_id}}</td>
+                    </tr>
+                {%endfor%}
+                <tr><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+            </table>
+        </table>
+        
+        </fieldset>
+    </div>
+    <br>
     <a href="{% url 'attendance:classroom_list' %}" class="btn btn-primary">
-        목록
+        목록으로
     </a>
     {% if is_checker == 'True' %}
         <a href="{% url 'attendance:classroom_edit' classroom.uuid %}" class="btn btn-info">
@@ -30,9 +91,44 @@
             삭제
         </a>
 
-        <a href="{% url 'attendance:classroom_enroll_list' classroom.uuid %}" class="btn btn-link">
+        <a href="{% url 'attendance:classroom_enroll_list' classroom.uuid %}" class="btn btn-dark">
             Mate 신청 목록
         </a>
     {% endif %}
 </div>
 {% endblock content %}
+<!-- 
+<div class="row">
+    <div class="col-6">
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Lorem
+          <span class="badge badge-primary">New</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Ipsum
+          <span class="badge badge-danger">12</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          Dolor
+          <span class="badge badge-warning">20</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-6">
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Lorem
+            <span class="badge badge-primary">New</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Ipsum
+            <span class="badge badge-danger">12</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Dolor
+            <span class="badge badge-warning">20</span>
+          </li>
+        </ul>
+      </div>
+  </div> -->

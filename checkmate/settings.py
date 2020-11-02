@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third apps
+    'channels',
     'django_extensions',
     'bootstrap4',
     'durationwidget',
@@ -81,7 +82,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'checkmate.wsgi.application'
-
+ASGI_APPLICATION = 'checkmate.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -146,3 +147,4 @@ MESSAGE_TAGS ={
     messages_contants.DEBUG: 'secondary',
     messages_contants.ERROR: 'danger',
 }
+

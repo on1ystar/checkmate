@@ -26,6 +26,7 @@ $.ajaxSetup({
         }
     }
 });
+
 // const request = new Request(
 //     /* URL */,
 //     {headers: {'X-CSRFToken': csrftoken}}

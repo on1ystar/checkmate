@@ -1,60 +1,62 @@
 {% extends 'attendance/layout.html '%}
+{% load static %}
+
 {% block style %}
 <style>
     #container {
-	margin: 50px auto;
-	width: 350px;
-	height: 250px;
-	border: 10px #333 solid;
-    align: center;
-}
+        margin: 0px auto;
+        width: 500px;
+        height: 378px;
+        border: 8px #333 solid;
+    }
+    #videoElementElement {
+        margin: 0px auto;
+        width: 500px;
+        border: none;
+    }
+    
 </style>
 {% endblock style %}
 
 {% block content %}
-
-<div id="container">
-	<video autoplay="true" id="videoElementElement"></video>
-</div>
-<div class='align-right'>
-    <button id="start" class='btn-outline-primary'> START </button>     
-    <button id="stop" class='btn-outline-danger'> STOP </button>
+<div class='container'>
+    <div id="container">
+        <video class="img-fluid img-profile mx-auto mb-2" autoplay="true" id="videoElementElement"></video>
+    </div>
+    <div class='align-right'>
+        <button id="start" class='btn-primary'> START </button>     
+        <button id="stop" class='btn-danger'> STOP </button>
+    </div>
 </div>
 {% endblock content %}
-
-<script>
-var video2 = document.getElementById("videoElementElement");
-
-navigator.mediaDevices.getUserMedia({ video2: { facingMode: "user" }  })
-    .then(function (stream) {
-    video2.srcObject = stream;
-    });
-          
-</script>
-
 {% block script %}
 <script>
-  // 웹캠 스트리밍 
-  var video = document.getElementById("videoElement");
-  var startButton = document.getElementById('start');
-  var stopButton = document.getElementById('stop');
-  var videoTracks;
+// 웹캠 스트리밍 
+var video = document.getElementById("videoElement");
+var video2 = document.getElementById("videoElementElement");
+var startButton = document.getElementById('start');
+var stopButton = document.getElementById('stop');
+var videoTracks;
 
 
-      
-  // 스트리밍 스타트
-  startButton.addEventListener('click', function(stream) {
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }  })
-      .then(function (stream) {
-      video.srcObject = stream;
-      videoTracks = stream.getVideoTracks();
-      })
-  });
+    
+// 스트리밍 스타트
+startButton.addEventListener('click', function(stream) {
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }  })
+    .then(function (stream) {
+    video.srcObject = stream;
+    video2.srcObject = stream;
+    videoTracks = stream.getVideoTracks();
+    videoTracks2 = stream.getVideoTracks();
+    })
+});
 
-  // 스트리밍 스탑
-  stopButton.addEventListener('click', function() {
-      videoTracks.forEach(function(track) {track.stop()});
-  });
+// 스트리밍 스탑
+stopButton.addEventListener('click', function() {
+    videoTracks.forEach(function(track) {track.stop()});
+    videoTracks2.forEach(function(track) {track.stop()});
+});
 
 </script>
 {% endblock script %}
+

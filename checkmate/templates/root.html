@@ -9,19 +9,21 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-2" style="text-align: center;">
           <div class="box" style="background: #BDBDBD;">
             <img class="img-fluid img-profile rounded-circle mx-auto mb-1"  src="{% static 'img/profile.JPG' %}">
           </div>
+          <a class="font-weight-light text-secondary" href="{% url 'accounts:profile' %}"><-profile-></a>
         </div>
         <!-- About-->
         <div class="col-sm-4">
           <div class="box2">
-            <p class="nm">CheckMate</p>
+            <p class="nm">{{user.profile.nickname}}</p>
             <p>
-                CBNU COMPUTER ENGINEERING TEAM 4<br>
+                <a href="mailto:name@email.com">{{user.email}}</a><br><br>
+                CBNU COMPUTER ENGINEERING TEAM <span class="font-weight-bolder font-italic">CheckMate</span><br>
                 딥러닝 기반의 얼굴 인식을 활용한 출석 체크 Web Service<br>
-                <a href="mailto:name@email.com">CheckMate_official@emailname.com</a>
+                
             </p>
           </div>
         </div>
@@ -38,50 +40,19 @@
                 <a href="{% url 'attendance:classroom_enroll' %}"><img class="button_checker" id="b2" src="{% static 'img/button_2.png' %}" alt="버튼2"></a>
             </fieldset> 
         </div>
-        <div class="col-sm-3">
-            <div class="g_int">
-                <h3>CHECK!</h3>
-                <p>현재 80% 출석 완료!</p>
-            </div>
-            <div class="graph1">
-                <section>
-                <div class="pieID pie">
-                </div>
-                <ul class="pieID legend">
-                    <li>
-                    <em>출석!</em>
-                    <span>180</span>
-                    </li>
-                    <li>
-                    <em>결석!</em>
-                    <span>20</span>
-                    </li>
-                </ul>
-                </section>
-            </div>
+        <div class="col-sm-6 mt-3">
+            <ul class="list-group">
+                {% for role in user.profile.role_set.all %}
+                    {% if role.is_checker == False %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ role.classroom.name }}
+                            <a class="badge badge-primary" href="">On</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         </div>
-        <div class="col-sm-3">
-            <div class="g_int">
-                <h3>MATE!</h3>
-                <p>현재 80% 출석 완료!</p>
-            </div>
-            <div class="graph2">
-                <section>
-                <div class="pieID2 pie2">
-                </div>
-                <ul class="pieID2 legend2">
-                    <li>
-                    <em>출석!</em>
-                    <span>50</span>
-                    </li>
-                    <li>
-                    <em>결석!</em>
-                    <span>150</span>
-                    </li>
-                </ul>
-                </section>
-            </div>
-        </div>
+            
         <div class="col-sm-6">
             <hr>
             <fieldset class= "noti" style="width:90%">
